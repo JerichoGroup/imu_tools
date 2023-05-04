@@ -129,12 +129,12 @@ ImuFilterRos::ImuFilterRos(ros::NodeHandle nh, ros::NodeHandle nh_private)
     int queue_size = 5;
 
     imu_subscriber_.reset(new ImuSubscriber(
-        nh_, ros::names::resolve("imu") + "/data_raw", queue_size));
+        nh_, "/X1/imu/data", queue_size));
 
     if (use_mag_)
     {
         mag_subscriber_.reset(new MagSubscriber(
-            nh_, ros::names::resolve("imu") + "/mag", queue_size));
+            nh_, "/X1/magnetic_field", queue_size));
 
         sync_.reset(new Synchronizer(SyncPolicy(queue_size), *imu_subscriber_,
                                      *mag_subscriber_));
